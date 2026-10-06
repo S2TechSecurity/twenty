@@ -78,6 +78,33 @@ const StyledContent = styled.div`
   }
 `;
 
+const StyledS2Signature = styled.div<{ isExpanded: boolean }>`
+  align-items: center;
+  display: flex;
+  flex-direction: ${({ isExpanded }) => (isExpanded ? 'row' : 'column')};
+  gap: ${themeCssVariables.spacing[1]};
+  justify-content: center;
+  margin: ${themeCssVariables.spacing[2]};
+  opacity: 0.55;
+  padding-top: ${themeCssVariables.spacing[2]};
+  color: ${themeCssVariables.font.color.tertiary};
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+`;
+
+const StyledS2Mark = styled.span`
+  background-image: url('https://s2tech.co.za/assets/brand/s2tech-logo-runtime.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: block;
+  height: 20px;
+  width: 32px;
+`;
+
+
 export const NavigationDrawer = ({
   children,
   className,
@@ -128,6 +155,14 @@ export const NavigationDrawer = ({
         <StyledContainer isExpanded={isExpanded}>
           <NavigationDrawerHeader />
           <StyledContent>{children}</StyledContent>
+          <StyledS2Signature
+            data-s2-signature="true"
+            aria-label="Built by S2 Tech"
+            isExpanded={isExpanded}
+          >
+            <StyledS2Mark aria-hidden="true" />
+            {isExpanded && <span>Built by S2</span>}
+          </StyledS2Signature>
         </StyledContainer>
 
         {isNavigationDrawerExpanded && !isMobile && (
